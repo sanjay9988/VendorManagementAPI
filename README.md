@@ -70,6 +70,8 @@ Implemetation is in progress :
 - typing_extensions==4.11.0
 - uuid==1.30
 
+## POSTMAN API DOCUMENTATION 
+https://documenter.getpostman.com/view/34269375/2sA3JJAids
 
 ## License
 
