@@ -42,16 +42,7 @@ The API will be accessible at `http://localhost:8000/`.
 
 ## API Endpoints
 
-- **GET /vendors/**
-  - Retrieve a list of all vendors.
-- **GET /vendors/{vendor_id}/**
-  - Retrieve details of a specific vendor.
-- **POST /vendors/**
-  - Create a new vendor.
-- **PUT /vendors/{vendor_id}/**
-  - Update details of a specific vendor.
-- **DELETE /vendors/{vendor_id}/**
-  - Delete a specific vendor.
+https://documenter.getpostman.com/view/34269375/2sA3JJAids
 
 ## Authentication
 
