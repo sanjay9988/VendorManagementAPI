@@ -48,7 +48,7 @@ https://documenter.getpostman.com/view/34269375/2sA3JJAids
 
 Implemetation is in progress :
    ```
-   Authorization: Token your_token_here will be implemented.
+    IN PROGRESS 
    ```
 
 ## Dependencies
