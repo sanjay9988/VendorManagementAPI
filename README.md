@@ -8,7 +8,7 @@ To run this project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your_username/vendor-management-api.git
+   git clone https://github.com/sanjay9988/VendorManagementAPI.git
    ```
 
 2. Navigate to the project directory:
