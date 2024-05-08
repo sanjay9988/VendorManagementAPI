@@ -1,0 +1,1503 @@
+{
+	"info": {
+		"_postman_id": "eabd85ee-572e-4e97-b990-a7b66c8a3330",
+		"name": "Vendor_App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33887463"
+	},
+	"item": [
+		{
+			"name": "Vendor",
+			"item": [
+				{
+					"name": "List_Of_Vendor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"<canvas id=\"lineChart\" height=\"100\"></canvas>",
+									"",
+									"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js\"></script>",
+									"",
+									"<script>",
+									"    var ctx = document.getElementById(\"lineChart\");",
+									"",
+									"    var lineChart = new Chart(ctx, {",
+									"        type: \"line\",",
+									"        data: {",
+									"            labels: [],",
+									"            datasets: [{",
+									"                label: \"Vendor Data\",",
+									"                data: [],",
+									"                fill: false,",
+									"                borderColor: \"rgb(75, 192, 192)\",",
+									"                tension: 0.1",
+									"            }]",
+									"        },",
+									"        options: {",
+									"            responsive: true,",
+									"            maintainAspectRatio: false,",
+									"            scales: {",
+									"                x: {",
+									"                    display: true,",
+									"                    title: {",
+									"                        display: true,",
+									"                        text: 'Vendor ID'",
+									"                    }",
+									"                },",
+									"                y: {",
+									"                    display: true,",
+									"                    title: {",
+									"                        display: true,",
+									"                        text: 'Vendor Name'",
+									"                    }",
+									"                }",
+									"            }",
+									"        }",
+									"    });",
+									"",
+									"    pm.getData(function (err, value) {",
+									"        lineChart.data.datasets[0].data = value.response.map(vendor => vendor.name);",
+									"        lineChart.data.labels = value.response.map(vendor => vendor.id);",
+									"        lineChart.update();",
+									"    });",
+									"",
+									"</script>`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    var res = pm.response.json();",
+									"    ",
+									"    var visualizerData = {",
+									"        response: res",
+									"    };",
+									"",
+									"    return visualizerData;",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/vendors/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"vendors",
+								""
+							]
+						},
+						"description": "This endpoint sends an HTTP GET request to retrieve a list of vendors. The response for this request can be documented as a JSON schema as follows:\n\n``` antlr4\n{\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"id\": {\n        \"type\": \"integer\"\n      },\n      \"name\": {\n        \"type\": \"string\"\n      },\n      \"contact_details\": {\n        \"type\": \"string\"\n      },\n      \"address\": {\n        \"type\": \"string\"\n      },\n      \"vendor_code\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "List_Of_Vendor",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/vendors/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"vendors",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 06 May 2024 10:17:04 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.12"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "147"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"ABC Corporation\",\n        \"contact_details\": \"123-456-7890, abc@abc.com\",\n        \"address\": \"123 Main St, Anytown, USA\",\n        \"vendor_code\": \"VE-7F6B2982\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Vender_Details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/vendors/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"vendors",
+								"1",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Vender_Details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/vendors/1/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"vendors",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 06 May 2024 10:20:03 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.12"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "145"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"ABC Corporation\",\n    \"contact_details\": \"123-456-7890, abc@abc.com\",\n    \"address\": \"123 Main St, Anytown, USA\",\n    \"vendor_code\": \"VE-7F6B2982\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"ABC Corporation 45\",\n    \"contact_details\": \"123-456-7890, abc@abc.com\",\n    \"address\": \"123 Main St, Anytown, USA\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/vendors/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"vendors",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"ABC Corporation\",\n    \"contact_details\": \"123-456-7890, abc@abc.com\",\n    \"address\": \"123 Main St, Anytown, USA\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{vendor}}/api/vendors/",
+									"host": [
+										"{{vendor}}"
+									],
+									"path": [
+										"api",
+										"vendors",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 06 May 2024 10:16:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.12"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "145"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"ABC Corporation\",\n    \"contact_details\": \"123-456-7890, abc@abc.com\",\n    \"address\": \"123 Main St, Anytown, USA\",\n    \"vendor_code\": \"VE-7F6B2982\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"XYZ Corporation\",\n    \"contact_details\": \"1234567890, updated@updated.com\",\n    \"address\": \"Bangalore Karnataka\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/vendors/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"vendors",
+								"1",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"XYZ Corporation\",\n    \"contact_details\": \"1234567890, updated@updated.com\",\n    \"address\": \"Bangalore Karnataka\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/vendors/1/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"vendors",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 06 May 2024 10:20:40 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.12"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "145"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"XYZ Corporation\",\n    \"contact_details\": \"1234567890, updated@updated.com\",\n    \"address\": \"Bangalore Karnataka\",\n    \"vendor_code\": \"VE-7F6B2982\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/vendors/17/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"vendors",
+								"17",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PurchasedOrder",
+			"item": [
+				{
+					"name": "FilterBy",
+					"item": [
+						{
+							"name": "vendor",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/purchase_orders/?vendor_id=1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"",
+										"api",
+										"purchase_orders",
+										""
+									],
+									"query": [
+										{
+											"key": "vendor_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "po_number",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/purchase_orders/?po_number=PO-3C286C9D",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"purchase_orders",
+										""
+									],
+									"query": [
+										{
+											"key": "po_number",
+											"value": "PO-3C286C9D"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "status",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/purchase_orders/?status=pending",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"purchase_orders",
+										""
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "pending"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "status",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/api/purchase_orders/?status=pending",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"api",
+												"purchase_orders",
+												""
+											],
+											"query": [
+												{
+													"key": "status",
+													"value": "pending"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 06 May 2024 10:41:44 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.10.12"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept, Cookie"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, POST, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "330"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 1,\n        \"po_number\": \"PO-3C286C9D\",\n        \"status\": \"pending\",\n        \"delivery_date\": null,\n        \"order_date\": \"2024-05-06T10:22:43Z\",\n        \"items\": [\n            {\n                \"name\": \"Product 3\",\n                \"quantity\": 100,\n                \"price\": 90\n            },\n            {\n                \"name\": \"Product 4\",\n                \"quantity\": 5,\n                \"price\": 300\n            }\n        ],\n        \"quantity\": 105,\n        \"quality_rating\": null,\n        \"issue_date\": \"2024-05-06T10:22:43Z\",\n        \"acknowledgment_date\": null,\n        \"vendor\": 1\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "po_number and vendor",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/purchase_orders/?po_number=PO-3C286C9D&vendor=1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"purchase_orders",
+										""
+									],
+									"query": [
+										{
+											"key": "po_number",
+											"value": "PO-3C286C9D"
+										},
+										{
+											"key": "vendor",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "vendor and status",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/purchase_orders/?vendor=1&status=pending",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"purchase_orders",
+										""
+									],
+									"query": [
+										{
+											"key": "vendor",
+											"value": "1"
+										},
+										{
+											"key": "status",
+											"value": "pending"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "all fields",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/purchase_orders/?po_number=PO002&vendor=19&status=pending",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"purchase_orders",
+										""
+									],
+									"query": [
+										{
+											"key": "po_number",
+											"value": "PO002"
+										},
+										{
+											"key": "vendor",
+											"value": "19"
+										},
+										{
+											"key": "status",
+											"value": "pending"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ListOfPurchasedOrder",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/purchase_orders",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"purchase_orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ListOfPurchasedOrder",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/purchase_orders",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"purchase_orders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 06 May 2024 10:36:34 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.12"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "344"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"po_number\": \"PO-3C286C9D\",\n        \"status\": \"Pending\",\n        \"delivery_date\": null,\n        \"order_date\": \"2024-05-06T10:22:43.860531Z\",\n        \"items\": [\n            {\n                \"name\": \"Product 3\",\n                \"quantity\": 100,\n                \"price\": 90\n            },\n            {\n                \"name\": \"Product 4\",\n                \"quantity\": 5,\n                \"price\": 300\n            }\n        ],\n        \"quantity\": 105,\n        \"quality_rating\": null,\n        \"issue_date\": \"2024-05-06T10:22:43.860570Z\",\n        \"acknowledgment_date\": null,\n        \"vendor\": 1\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "PurchasedOrderDetail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/purchase_orders/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"purchase_orders",
+								"1",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PurchasedOrderDetail",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/purchase_orders/1/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"purchase_orders",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 06 May 2024 10:37:03 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.12"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "342"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"po_number\": \"PO-3C286C9D\",\n    \"status\": \"Pending\",\n    \"delivery_date\": null,\n    \"order_date\": \"2024-05-06T10:22:43.860531Z\",\n    \"items\": [\n        {\n            \"name\": \"Product 3\",\n            \"quantity\": 100,\n            \"price\": 90\n        },\n        {\n            \"name\": \"Product 4\",\n            \"quantity\": 5,\n            \"price\": 300\n        }\n    ],\n    \"quantity\": 105,\n    \"quality_rating\": null,\n    \"issue_date\": \"2024-05-06T10:22:43.860570Z\",\n    \"acknowledgment_date\": null,\n    \"vendor\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vendor\": 1,\n  \"order_date\": \"2024-05-05T10:00:00Z\",\n  \"items\": [\n    {\n      \"name\": \"Product 3\",\n      \"quantity\": 100,\n      \"price\": 90.00\n    },\n    {\n      \"name\": \"Product 4\",\n      \"quantity\": 5,\n      \"price\": 300.00\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/purchase_orders/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"purchase_orders",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"vendor\": 1,\n  \"order_date\": \"2024-05-05T10:00:00Z\",\n  \"items\": [\n    {\n      \"name\": \"Product 3\",\n      \"quantity\": 100,\n      \"price\": 90.00\n    },\n    {\n      \"name\": \"Product 4\",\n      \"quantity\": 5,\n      \"price\": 300.00\n    }\n  ]\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/purchase_orders/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"purchase_orders",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 06 May 2024 10:22:43 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.12"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "342"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"po_number\": \"PO-3C286C9D\",\n    \"status\": \"Pending\",\n    \"delivery_date\": null,\n    \"order_date\": \"2024-05-06T10:22:43.860531Z\",\n    \"items\": [\n        {\n            \"name\": \"Product 3\",\n            \"quantity\": 100,\n            \"price\": 90\n        },\n        {\n            \"name\": \"Product 4\",\n            \"quantity\": 5,\n            \"price\": 300\n        }\n    ],\n    \"quantity\": 105,\n    \"quality_rating\": null,\n    \"issue_date\": \"2024-05-06T10:22:43.860570Z\",\n    \"acknowledgment_date\": null,\n    \"vendor\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "UpdatePurchaseOrder",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vendor\":1,\n    \"items\": [\n        {\"name\": \"Item 1\", \"quantity\": 15, \"unit_price\": 50},\n        {\"name\": \"Item 2\", \"quantity\": 8, \"unit_price\": 75}\n    ]\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/purchase_orders/9/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"purchase_orders",
+								"9",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UpdatePurchaseOrder",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vendor\":1,\n    \"items\": [\n        {\"name\": \"Item 1\", \"quantity\": 15, \"unit_price\": 50},\n        {\"name\": \"Item 2\", \"quantity\": 8, \"unit_price\": 75}\n    ]\n}\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/purchase_orders/1/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"purchase_orders",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 06 May 2024 10:51:40 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.12"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "326"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"po_number\": \"PO-3C286C9D\",\n    \"status\": \"pending\",\n    \"delivery_date\": null,\n    \"order_date\": \"2024-05-06T10:22:43Z\",\n    \"items\": [\n        {\n            \"name\": \"Item 1\",\n            \"quantity\": 15,\n            \"unit_price\": 50\n        },\n        {\n            \"name\": \"Item 2\",\n            \"quantity\": 8,\n            \"unit_price\": 75\n        }\n    ],\n    \"quantity\": 105,\n    \"quality_rating\": null,\n    \"issue_date\": \"2024-05-06T10:22:43Z\",\n    \"acknowledgment_date\": null,\n    \"vendor\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "PatchPurchaseOrder",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"delivery_date\": \"2024-07-10T12:00:00\",\n    \"quality_rating\":7.8\n}\n\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/purchase_orders/14/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"purchase_orders",
+								"14",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PatchPurchaseOrder",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"delivery_date\": \"2024-07-10T12:00:00\"\n}\n\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/purchase_orders/1/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"purchase_orders",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 06 May 2024 10:53:24 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.12"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "344"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"po_number\": \"PO-3C286C9D\",\n    \"status\": \"pending\",\n    \"delivery_date\": \"2024-07-10T12:00:00Z\",\n    \"order_date\": \"2024-05-06T10:22:43Z\",\n    \"items\": [\n        {\n            \"name\": \"Item 1\",\n            \"quantity\": 15,\n            \"unit_price\": 50\n        },\n        {\n            \"name\": \"Item 2\",\n            \"quantity\": 8,\n            \"unit_price\": 75\n        }\n    ],\n    \"quantity\": 105,\n    \"quality_rating\": null,\n    \"issue_date\": \"2024-05-06T10:22:43Z\",\n    \"acknowledgment_date\": null,\n    \"vendor\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "UpdatingDelivery",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"completed\"\n}\n\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/purchase_orders/4/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"purchase_orders",
+								"4",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/purchase_orders/15/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"purchase_orders",
+								"15",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Acknowledge a purchase order",
+			"item": [
+				{
+					"name": "ACK",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/purchase_orders/7/acknowledge/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"purchase_orders",
+								"7",
+								"acknowledge",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "VendorPerformance",
+			"item": [
+				{
+					"name": "VendorPerformance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/vendors/1/performance/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"vendors",
+								"1",
+								"performance",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "VendorPerformance",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{vendor}}/api/vendors/1/performance/",
+									"host": [
+										"{{vendor}}"
+									],
+									"path": [
+										"api",
+										"vendors",
+										"1",
+										"performance",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 06 May 2024 11:25:37 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.12"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "153"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"on_time_delivery_rate\": 44.44444444444444,\n    \"quality_rating_average\": 6.15,\n    \"average_response_time\": 806.0672367142857,\n    \"fulfillment_rate\": 10.526315789473683\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
